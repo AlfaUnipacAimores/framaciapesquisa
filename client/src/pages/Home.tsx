@@ -1,6 +1,9 @@
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Beaker, BookOpen, Microscope, Zap } from "lucide-react";
+import { ArrowRight, Beaker, BookOpen, FileText, LogOut, Microscope, Zap } from "lucide-react";
+import { getLoginUrl } from "@/const";
+import { Link } from "wouter";
 
 /**
  * Design Philosophy: Modernismo Científico com Austeridade Elegante
@@ -11,6 +14,8 @@ import { ArrowRight, Beaker, BookOpen, Microscope, Zap } from "lucide-react";
  */
 
 export default function Home() {
+  const { user, logout } = useAuth();
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Navigation */}
@@ -19,7 +24,7 @@ export default function Home() {
           <div className="text-2xl font-bold text-blue-900">
             Farmácia & Pesquisa
           </div>
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex gap-8 items-center">
             <a href="#evolucao" className="text-gray-700 hover:text-blue-900 transition">
               Evolução
             </a>
@@ -32,6 +37,31 @@ export default function Home() {
             <a href="#impacto" className="text-gray-700 hover:text-blue-900 transition">
               Impacto
             </a>
+            <Link href="/recursos" className="text-gray-700 hover:text-blue-900 transition">
+              Recursos
+            </Link>
+            {user ? (
+              <div className="flex gap-3 items-center">
+                <span className="text-sm text-gray-600">{user.name}</span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => logout()}
+                  className="flex gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sair
+                </Button>
+              </div>
+            ) : (
+              <Button
+                size="sm"
+                className="bg-blue-900 text-white hover:bg-blue-800"
+                onClick={() => (window.location.href = getLoginUrl())}
+              >
+                Login
+              </Button>
+            )}
           </div>
         </div>
       </nav>
@@ -365,9 +395,12 @@ export default function Home() {
             <Button className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-3 font-semibold">
               Saiba Mais Sobre o Curso
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-blue-800 px-8 py-3 font-semibold">
-              Contato
-            </Button>
+            <Link href="/recursos">
+              <Button variant="outline" className="border-white text-white hover:bg-blue-800 px-8 py-3 font-semibold w-full">
+                <FileText className="mr-2 w-4 h-4" />
+                Acessar Recursos
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
