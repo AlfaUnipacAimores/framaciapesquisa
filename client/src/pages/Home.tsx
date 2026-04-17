@@ -22,6 +22,7 @@ const ALUNOS = [
   "Maria Jackeline Matos Silva de Andrade",
   "Ludimila Caetano da Silva",
   "Ana Lídia Costa de Lima",
+  "Thayná Strelow",
   "Leandro Teixeira"
 ];
 
@@ -61,6 +62,12 @@ export default function Home() {
             </a>
             <Link href="/recursos" className="text-gray-700 hover:text-blue-900 transition">
               Recursos
+            </Link>
+            <Link href="/referencias" className="text-gray-700 hover:text-blue-900 transition">
+              Referências
+            </Link>
+            <Link href="/links" className="text-gray-700 hover:text-blue-900 transition">
+              Links
             </Link>
             {user ? (
               <div className="flex gap-3 items-center">
